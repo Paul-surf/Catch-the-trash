@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 060f555dc61e4254d958c04e112431b6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Spongy PERSONAL USE ONLY
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b31a1d09a64a7f84abb6d5f3087089a5, type: 3}
+  - {fileID: 12800000, guid: 747060d919501d948929df40d2714117, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
