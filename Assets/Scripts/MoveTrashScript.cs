@@ -15,7 +15,7 @@ public class MoveTrashScript : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.name == "Hook" && HookScript.TrashCollected < HookScript.MaxTrashCollected) {
+        if(col.gameObject.name == "Hook" && HookScript.TrashCollected < HookScript.MaxTrashCollected && HookScript.ReachedMaxDepth == false) {
             AddTrashCatched();
             Destroy(this.gameObject);
         }

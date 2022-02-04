@@ -7,15 +7,11 @@ public class StartScript : MonoBehaviour
 {  
         public GameObject hook;
         public GameObject terrain;
-        public GameObject button;
+        public GameObject button, UpgradeButton;
         public GameObject FishingGuy;
 
         public Transform Cloud1, Cloud2;
         public BoxCollider2D AirLayerBox;
-
-        public GameObject UpgradeBox1;
-        public GameObject UpgradeBox2;
-
         private float StartOfScreen;
         private float EndOfScreen;
         private float ms = 1/5f;
@@ -55,8 +51,7 @@ public class StartScript : MonoBehaviour
         earrape.Play();
         button.SetActive(false);
         terrain.SetActive(true);
-        UpgradeBox1.SetActive(false);
-        UpgradeBox2.SetActive(false);
+        UpgradeButton.SetActive(false);
         FishingGuy.GetComponentInChildren<Animator>().Play("StartFishing");
         spriteR.sprite = Fishing;
         Invoke("EnableHook", 0.6f);

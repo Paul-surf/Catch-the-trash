@@ -11,7 +11,7 @@ public class hook : MonoBehaviour
     public SpawnScript spawnScript;
 
     float dirX;
-    float moveSpeed = 60f;
+    float moveSpeed = 120f;
     private float StartYPos;
     public float VertMoveSpeed = 2f;
     public int TrashCollected = 0;
@@ -21,13 +21,13 @@ public class hook : MonoBehaviour
     bool FunctionCalled = false;
     public StartScript RestartScript;
     public GameObject StartGame;
-    public GameObject HelpMenu;
-    public GameObject b1;
-    public GameObject b2;
+    public GameObject HelpMenu, UpgradeButton;
     public GameObject krog;
     public TextMeshProUGUI _coinTxt;
     public ButtonManager ButtonManagerScript;
+    public DepthCounter CounterOfDepth;
     public float coins;
+    public bool ReachedMaxDepth = false;
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         StartYPos = transform.position.y;
@@ -37,7 +37,7 @@ public class hook : MonoBehaviour
         _coinTxt.text = coins.ToString();
         TrashCounter.text = TrashCollected + "/" + MaxTrashCollected;
         dirX = Input.acceleration.x * moveSpeed;
-        if(TrashCollected < MaxTrashCollected && transform.position.y < -230) {
+        if(TrashCollected < MaxTrashCollected && transform.position.y < -230 && ReachedMaxDepth == false) {
             rb.velocity = new Vector2(dirX, 0f);
             if(Input.GetKey(KeyCode.RightArrow)) {
                 rb.velocity = new Vector2(30, 0f);
@@ -60,14 +60,20 @@ public class hook : MonoBehaviour
     }
 
     void FixedUpdate() {
+
+    
+        if(CounterOfDepth.CurrentDepth == CounterOfDepth.MaxDepth+1) {
+            ReachedMaxDepth = true;
+        }
+
         if(TrashCollected < MaxTrashCollected) {
             VertMoveSpeed = 2f;
             transform.position = new Vector3(transform.position.x, transform.position.y - VertMoveSpeed, transform.position.z);
             transform.Translate(Vector3.down * VertMoveSpeed * Time.deltaTime);
         }
 
-        if(TrashCollected >= MaxTrashCollected && transform.position.y < StartYPos-6f) {
-            VertMoveSpeed = 6f;
+        if(TrashCollected >= MaxTrashCollected && transform.position.y < StartYPos || ReachedMaxDepth == true) {
+            VertMoveSpeed = 9f;
             transform.position = new Vector3(transform.position.x, transform.position.y + VertMoveSpeed, transform.position.z);
             transform.Translate(Vector3.up * VertMoveSpeed * Time.deltaTime);
             FunctionCalled = true;
@@ -80,18 +86,18 @@ public class hook : MonoBehaviour
             TrashCounterShow.SetActive(false);
             StartGame.SetActive(true);
             HelpMenu.SetActive(true);
-            b1.SetActive(true);
-            b2.SetActive(true);
             IncreaseGold();
             TrashCollected = 0;
             _coinTxt.text = coins.ToString();
             spawnScript.PrefabFunction();
+            ReachedMaxDepth = false;
+            UpgradeButton.SetActive(true);
         }
     }
 
     void IncreaseGold() {
         coins += TrashCollected * 5 * ButtonManagerScript.CoinUpgradeScale;
-        Debug.Log(ButtonManagerScript.CoinUpgradeScale);
+        // Debug.Log(ButtonManagerScript.CoinUpgradeScale);
         coins = Mathf.Floor(coins);
     }
 
