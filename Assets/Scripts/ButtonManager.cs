@@ -17,7 +17,7 @@ public class ButtonManager : MonoBehaviour
     public Image HookUpgradeImage;
     public SpriteRenderer HookImage;
     int b, c, d, e = 0, f = 0, g = 0, h = 0, HookLv = 1, DepthLv = 1, CapacityLv = 1, GoldLv = 1;
-    public float CoinUpgradeScale = 1, HookUpgradeCost = 50, CoinUpgradeCost = 15, CapacityUpgradeCost = 20, DepthUpgradeCost = 25;
+    public float CoinUpgradeScale = 1, HookUpgradeCost = 50, CoinUpgradeCost = 25, CapacityUpgradeCost = 20, DepthUpgradeCost = 15;
     void Update() {
         // Letting HookScript.coins be equal to our coins
         HookScript._coinTxt.text = HookScript.coins.ToString();
@@ -151,23 +151,4 @@ public class ButtonManager : MonoBehaviour
             DisableHookText.text = "";
         }
     }
-
-// Here is some commented out sound effects since we didn't want these in.
-        // public void box1Effects() {
-    //     b++;
-    //     if (n%2 == 0) {
-    //         audioSource2.Play();
-    //     } else {
-    //         audioSource2.Play();
-    //     }
-        
-    // }
-    // public void box2Effects() {
-    //     d++;
-    //     if (n%2 == 0) {
-    //         audioSource4.Play();
-    //     } else {
-    //         audioSource4.Play();
-    //     }
-    // }
 }

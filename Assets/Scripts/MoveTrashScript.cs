@@ -15,13 +15,23 @@ public class MoveTrashScript : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.name == "Hook" && HookScript.TrashCollected < HookScript.MaxTrashCollected && HookScript.ReachedMaxDepth == false) {
-            AddTrashCatched();
-            Destroy(this.gameObject);
+        if (gameObject.name == "Fish2(Clone)" || gameObject.name == "Fish(Clone)") {
+            if(col.gameObject.name == "Hook" && (HookScript.TrashCollected + HookScript.FishCollected) < HookScript.MaxTrashCollected && HookScript.ReachedMaxDepth == false) {
+                AddFishCatched();
+                Destroy(this.gameObject);
+            }
+        } else {
+            if(col.gameObject.name == "Hook" && (HookScript.TrashCollected + HookScript.FishCollected) < HookScript.MaxTrashCollected && HookScript.ReachedMaxDepth == false) {
+                AddTrashCatched();
+                Destroy(this.gameObject);
+            }
         }
     }
     
     public void AddTrashCatched() {
-        HookScript.TrashCollected = HookScript.TrashCollected + 1;
+        HookScript.TrashCollected += 1;
+    }
+    public void AddFishCatched() {
+        HookScript.FishCollected += 1;
     }
 }
