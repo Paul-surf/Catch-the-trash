@@ -5,25 +5,19 @@ using UnityEngine.UI;
 using TMPro;
 public class ButtonManager : MonoBehaviour
 {
-    public GameObject panel;
     public Sprite[] icons;
-    public GameObject StartGameButton, upgradeButton;
-    public AudioSource audioSource;
-    public AudioSource audioSource2;
-    public AudioSource audioSource4;
+    public GameObject StartGameButton, upgradeButton, panel, HookMaxText, DepthMaxText, CapacityMaxText, CoinMaxText;
+    public AudioSource audioSource, audioSource2, audioSource4;
     public Button CoinUpgradeButton, CapacityUpgradeButton, DepthUpgradeButton, HookUpgradeButton;
     public hook HookScript;
     public DepthCounter DepthCounterScript;
-    public TextMeshProUGUI CoinUpgradeCostText, CapacityUpgradeCostText, DepthUpgradeCostText, HookUpgradeCostText;
-    public TextMeshProUGUI CoinLvText, CapacityLvText, DepthLvText, HookLvText;
-    public GameObject HookMaxText, DepthMaxText, CapacityMaxText, CoinMaxText;
-    public TextMeshProUGUI DisableHookText, DisableDepthText, DisableCapacityText, DisableCoinText;
+    public TextMeshProUGUI DisableHookText, DisableDepthText, DisableCapacityText, 
+    DisableCoinText, CoinUpgradeCostText, CapacityUpgradeCostText, DepthUpgradeCostText, 
+    HookUpgradeCostText, CoinLvText, CapacityLvText, DepthLvText, HookLvText;
     public Image HookUpgradeImage;
     public SpriteRenderer HookImage;
-    int n, b, c, d, e = 0, f = 0, g = 0, h = 0, HookLv = 1, DepthLv = 1, CapacityLv = 1, GoldLv = 1;
-    public float CoinUpgradeScale = 1;
-    public float CoinUpgradeCost = 15, CapacityUpgradeCost = 20, DepthUpgradeCost = 25;
-    public float HookUpgradeCost = 50;
+    int b, c, d, e = 0, f = 0, g = 0, h = 0, HookLv = 1, DepthLv = 1, CapacityLv = 1, GoldLv = 1;
+    public float CoinUpgradeScale = 1, HookUpgradeCost = 50, CoinUpgradeCost = 15, CapacityUpgradeCost = 20, DepthUpgradeCost = 25;
     void Update() {
         // Letting HookScript.coins be equal to our coins
         HookScript._coinTxt.text = HookScript.coins.ToString();
@@ -72,34 +66,20 @@ public class ButtonManager : MonoBehaviour
         }
 
     }
-// Heres the tutorial button
-    public void OnButtonHelpPress()
-    {
-        n++;
-        if (n%2 == 0) {
-            panel.SetActive(false);
-            StartGameButton.SetActive(true);
-            upgradeButton.SetActive(true);
-        } else {
-            panel.SetActive(true);
-            StartGameButton.SetActive(false);
-            upgradeButton.SetActive(false);
-        }
-        if (n%10 == 0) {
-            audioSource.Play();
-        }
-    }
     // Heres the source code for all our upgrades
     public void GoldUpgrade() {
         h++;
-        if(h < 5 && HookScript.coins - CoinUpgradeCost >= 0) {
+        if (h < 5 && HookScript.coins - CoinUpgradeCost >= 0) 
+        {
             HookScript.coins -= CoinUpgradeCost;
             CoinUpgradeScale *= 1.3f;
             HookScript._coinTxt.text = HookScript.coins.ToString();
             CoinUpgradeCost *= 2;
             GoldLv += 1;
             CoinLvText.text = "Lv " + GoldLv.ToString();
-        } else if (h == 5 && GoldLv == 5) {
+        } 
+        else 
+        {
             CoinUpgradeButton.interactable = false;
             CoinLvText.text = "Lv Max";
             DisableCoinText.text = "";
@@ -110,17 +90,20 @@ public class ButtonManager : MonoBehaviour
 
     public void CapacityUpgrade() {
         g++;
-        if (g < 3 && HookScript.coins - CapacityUpgradeCost >= 0) {
+        if (g < 3 && HookScript.coins - CapacityUpgradeCost >= 0) 
+        {
             HookScript.coins -= CapacityUpgradeCost;
+            CapacityUpgradeCost *= 2.5f;
             HookScript.MaxTrashCollected += 1;
             CapacityLv += 1;
             CapacityLvText.text = "Lv " + CapacityLv.ToString();
-            CapacityUpgradeCost *= 2.5f;
-        } else if (g == 3 && CapacityLv == 3) {
+        } 
+        else 
+        {
             CapacityUpgradeButton.interactable = false;
+            CapacityMaxText.SetActive(true);
             CapacityLvText.text = "Lv Max";
             DisableCapacityText.text = "";
-            CapacityMaxText.SetActive(true);
             CapacityUpgradeCostText.text = "";
         }
     }
@@ -128,15 +111,17 @@ public class ButtonManager : MonoBehaviour
         f++;
         if (f < 4 && HookScript.coins - DepthUpgradeCost >= 0) {
             HookScript.coins -= DepthUpgradeCost;
+            DepthUpgradeCost = Mathf.Floor(DepthUpgradeCost * 1.75f);
             DepthCounterScript.MaxDepth += 5;
             DepthLv += 1;
             DepthLvText.text = "Lv " + DepthLv.ToString();
-            DepthUpgradeCost = Mathf.Floor(DepthUpgradeCost * 1.75f);
-        } else if (f == 4 && DepthLv == 4) {
+        } 
+        else
+        {
             DepthUpgradeButton.interactable = false;
+            DepthMaxText.SetActive(true);
             DepthLvText.text = "Lv Max";
             DisableDepthText.text = "";
-            DepthMaxText.SetActive(true);
             DepthUpgradeCostText.text = "";
         }
 
@@ -152,7 +137,9 @@ public class ButtonManager : MonoBehaviour
             HookLv += 1;
             HookLvText.text = "Lv " + HookLv.ToString();
             HookScript.MaxTrashCollected += 1;
-        } else if(e == 5) {
+        } 
+        else 
+        {
             HookUpgradeButton.interactable = false;
             HookLv += 1;
             HookLvText.text = "Lv Max";

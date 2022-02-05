@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-
 public class UpgradePageScript : MonoBehaviour
 {
     public GameObject UpgradeButton;
+    public TextMeshProUGUI CoinsText;
     public Animator OpenPage;
+    public hook HookScript;
     void Start() 
     {
         OpenPage.gameObject.GetComponent<Animator>();
+    }
+    void Update() {
+        HookScript._coinTxt.text = HookScript.coins.ToString();
+        CoinsText.text = HookScript.coins.ToString();
     }
     public void UpgradesPageFunction() {
         UpgradeButton.SetActive(false);

@@ -40,10 +40,10 @@ public class hook : MonoBehaviour
         if(TrashCollected < MaxTrashCollected && transform.position.y < -230 && ReachedMaxDepth == false) {
             rb.velocity = new Vector2(dirX, 0f);
             if(Input.GetKey(KeyCode.RightArrow)) {
-                rb.velocity = new Vector2(30, 0f);
+                rb.velocity = new Vector2(60, 0f);
             }
             if(Input.GetKey(KeyCode.LeftArrow)) {
-                rb.velocity = new Vector2(-30, 0f);
+                rb.velocity = new Vector2(-60, 0f);
             }
             transform.position = new Vector2 (Mathf.Clamp(transform.position.x, terrainScript.NewWidth/-2+10, terrainScript.NewWidth/2-10), transform.position.y);
         } else {
@@ -60,19 +60,19 @@ public class hook : MonoBehaviour
     }
 
     void FixedUpdate() {
-
-    
-        if(CounterOfDepth.CurrentDepth == CounterOfDepth.MaxDepth+1) {
+        if(CounterOfDepth.CurrentDepth == CounterOfDepth.MaxDepth+1) 
+        {
             ReachedMaxDepth = true;
         }
-
-        if(TrashCollected < MaxTrashCollected) {
+        if(TrashCollected < MaxTrashCollected) 
+        {
             VertMoveSpeed = 2f;
             transform.position = new Vector3(transform.position.x, transform.position.y - VertMoveSpeed, transform.position.z);
             transform.Translate(Vector3.down * VertMoveSpeed * Time.deltaTime);
         }
 
-        if(TrashCollected >= MaxTrashCollected && transform.position.y < StartYPos || ReachedMaxDepth == true) {
+        if(TrashCollected >= MaxTrashCollected && transform.position.y < StartYPos || ReachedMaxDepth == true) 
+        {
             VertMoveSpeed = 9f;
             transform.position = new Vector3(transform.position.x, transform.position.y + VertMoveSpeed, transform.position.z);
             transform.Translate(Vector3.up * VertMoveSpeed * Time.deltaTime);
